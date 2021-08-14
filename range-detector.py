@@ -73,9 +73,9 @@ def main():
         else:
             frame_to_thresh = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     else:
-        camera = cv2.VideoCapture(1)
-        if camera.read()[0]==False:
-            camera=cv2.VideoCapture(0)
+        camera = cv2.VideoCapture(0)
+        if not camera.read()[0]:
+            camera = cv2.VideoCapture(1)
 
     setup_trackbars(range_filter)
 
@@ -102,10 +102,10 @@ def main():
             cv2.imshow("Original", image)
             cv2.imshow("Thresh", thresh)
 
-        if cv2.waitKey(1) & 0xFF is ord('q'):
-            t =  (v1_min, v2_min, v3_min, v1_max, v2_max, v3_max)
+        if cv2.waitKey(1) & 0xFF is ord('q'):   # press q
+            t = (v1_min, v2_min, v3_min, v1_max, v2_max, v3_max)
             with open("range.pickle", "wb") as f:
-                pickle.dump(t,f)
+                pickle.dump(t, f)
             break
 
 
