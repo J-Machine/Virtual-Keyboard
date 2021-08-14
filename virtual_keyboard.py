@@ -132,7 +132,7 @@ def main():
 		blur = cv2.GaussianBlur(blur, (5, 5), 0)
 		thresh = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
 		contours = cv2.findContours(thresh.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-		contours = contours[0] if len(contours) == 2 else contours[1]
+		contours = contours[0] if len(contours) == 2 else contours[1] #fixed problem
 		print('\n******* img> contours:')
 		print(contours)
 
@@ -156,7 +156,7 @@ def main():
 					old_area = new_area
 				c += 1
 				diff_area = 0
-				if c > 3:  # after every 3rd iteration difference of area is calculated
+				if c > 3:  # after every 3	rd iteration difference of area is calculated
 					diff_area = new_area - old_area
 					c = 0
 				if c2 == 0:
